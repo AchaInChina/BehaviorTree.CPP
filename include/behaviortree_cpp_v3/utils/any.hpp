@@ -1,4 +1,4 @@
-//
+﻿//
 // Implementation of N4562 std::experimental::any (merged into C++17) for C++11 compilers.
 //
 // See also:

@@ -70,7 +70,7 @@ class TreeNode
     virtual ~TreeNode() = default;
 
     /// The method that should be used to invoke tick() and setStatus();
-    virtual BT::NodeStatus executeTick();
+    virtual BT::NodeStatus executeTick(std::shared_ptr<void> prt = nullptr);
 
     /// The method used to interrupt the execution of a RUNNING node.
     /// Only Async nodes that may return RUNNING should implement it.
@@ -148,7 +148,8 @@ class TreeNode
 
   protected:
     /// Method to be implemented by the user
-    virtual BT::NodeStatus tick() = 0;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) = 0;
+    //virtual BT::NodeStatus tick() = 0;
 
     friend class BehaviorTreeFactory;
     friend class DecoratorNode;

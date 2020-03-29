@@ -30,7 +30,7 @@ SimpleActionNode::SimpleActionNode(const std::string& name,
 {
 }
 
-NodeStatus SimpleActionNode::tick()
+NodeStatus SimpleActionNode::tick(std::shared_ptr<void> ptr)
 {
     NodeStatus prev_status = status();
 
@@ -54,9 +54,9 @@ SyncActionNode::SyncActionNode(const std::string &name, const NodeConfiguration&
   ActionNodeBase(name, config)
 {}
 
-NodeStatus SyncActionNode::executeTick()
+NodeStatus SyncActionNode::executeTick(std::shared_ptr<void> ptr)
 {
-  auto stat = ActionNodeBase::executeTick();
+  auto stat = ActionNodeBase::executeTick(ptr);
   if( stat == NodeStatus::RUNNING)
   {
     throw LogicError("SyncActionNode MUST never return RUNNING");
@@ -129,7 +129,7 @@ void CoroActionNode::halt()
 
 
 
-NodeStatus StatefulActionNode::tick()
+NodeStatus StatefulActionNode::tick(std::shared_ptr<void> ptr)
 {
   const NodeStatus initial_status = status();
 
@@ -165,7 +165,7 @@ void StatefulActionNode::halt()
   setStatus(NodeStatus::IDLE);
 }
 
-NodeStatus BT::AsyncActionNode::executeTick()
+NodeStatus BT::AsyncActionNode::executeTick(std::shared_ptr<void> ptr)
 {
     //send signal to other thread.
     // The other thread is in charge for changing the status
@@ -173,10 +173,10 @@ NodeStatus BT::AsyncActionNode::executeTick()
     {
         setStatus( NodeStatus::RUNNING );
         halt_requested_ = false;
-        thread_handle_ = std::async(std::launch::async, [this]() {
+        thread_handle_ = std::async(std::launch::async, [this, ptr]() {
 
             try {
-                setStatus(tick());
+                setStatus(tick(ptr));
             }
             catch (std::exception&)
             {

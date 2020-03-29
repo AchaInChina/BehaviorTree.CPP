@@ -43,7 +43,7 @@ class SetBlackboard : public SyncActionNode
     }
 
   private:
-    virtual BT::NodeStatus tick() override
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override
     {
         std::string key, value;
         if ( !getInput("output_key", key) )

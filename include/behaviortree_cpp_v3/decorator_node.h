@@ -33,7 +33,7 @@ class DecoratorNode : public TreeNode
         return NodeType::DECORATOR;
     }
 
-    NodeStatus executeTick() override;
+    NodeStatus executeTick(std::shared_ptr<void> ptr = nullptr) override;
 };
 
 /**
@@ -58,7 +58,7 @@ class SimpleDecoratorNode : public DecoratorNode
     ~SimpleDecoratorNode() override = default;
 
   protected:
-    virtual NodeStatus tick() override;
+    virtual NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
     TickFunctor tick_functor_;
 };

@@ -30,13 +30,13 @@ BT::NodeStatus GripperInterface::close()
     return BT::NodeStatus::SUCCESS;
 }
 
-BT::NodeStatus ApproachObject::tick()
+BT::NodeStatus ApproachObject::tick(std::shared_ptr<void> ptr)
 {
     std::cout << "ApproachObject: " << this->name() << std::endl;
     return BT::NodeStatus::SUCCESS;
 }
 
-BT::NodeStatus SaySomething::tick()
+BT::NodeStatus SaySomething::tick(std::shared_ptr<void> ptr)
 {
     auto msg = getInput<std::string>("message");
     if (!msg)

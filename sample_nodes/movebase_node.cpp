@@ -8,7 +8,7 @@ BT_REGISTER_NODES(factory)
     factory.registerNodeType<MoveBaseAction>("MoveBase");
 }
 
-BT::NodeStatus MoveBaseAction::tick()
+BT::NodeStatus MoveBaseAction::tick(std::shared_ptr<void> ptr)
 {
     Pose2D goal;
     if ( !getInput<Pose2D>("goal", goal))

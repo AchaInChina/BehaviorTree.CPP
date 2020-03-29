@@ -20,7 +20,7 @@ class SubtreeNode : public DecoratorNode
     virtual ~SubtreeNode() override = default;
 
   private:
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
     virtual NodeType type() const override final
     {
@@ -40,7 +40,7 @@ public:
   virtual ~SubtreeWrapperNode() override = default;
 
 private:
-  virtual BT::NodeStatus tick() override;
+  virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
   virtual NodeType type() const override final
   {

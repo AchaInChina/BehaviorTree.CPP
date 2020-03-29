@@ -41,7 +41,7 @@ class TimeoutNode : public DecoratorNode
   private:
     TimerQueue timer_ ;
 
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
     std::atomic<bool> child_halted_;
     uint64_t timer_id_;

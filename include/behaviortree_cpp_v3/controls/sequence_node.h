@@ -43,7 +43,7 @@ class SequenceNode : public ControlNode
   private:
     size_t current_child_idx_;
 
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 
 }

@@ -36,7 +36,7 @@ TimeoutNode::TimeoutNode(const std::string& name, const NodeConfiguration& confi
 {
 }
 
-NodeStatus TimeoutNode::tick()
+NodeStatus TimeoutNode::tick(std::shared_ptr<void> ptr)
 {
     if( read_parameter_from_ports_ )
     {

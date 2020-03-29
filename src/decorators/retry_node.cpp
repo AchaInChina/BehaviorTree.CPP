@@ -40,7 +40,7 @@ void RetryNode::halt()
     DecoratorNode::halt();
 }
 
-NodeStatus RetryNode::tick()
+NodeStatus RetryNode::tick(std::shared_ptr<void> ptr)
 {
     if( read_parameter_from_ports_ )
     {
@@ -54,7 +54,7 @@ NodeStatus RetryNode::tick()
 
     while (try_index_ < max_attempts_ || max_attempts_ == -1)
     {
-        NodeStatus child_state = child_node_->executeTick();
+        NodeStatus child_state = child_node_->executeTick(ptr);
 
         switch (child_state)
         {

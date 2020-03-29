@@ -7,14 +7,14 @@ BT::SubtreeNode::SubtreeNode(const std::string &name) :
     setRegistrationID("SubTree");
 }
 
-BT::NodeStatus BT::SubtreeNode::tick()
+BT::NodeStatus BT::SubtreeNode::tick(std::shared_ptr<void> ptr)
 {
     NodeStatus prev_status = status();
     if (prev_status == NodeStatus::IDLE)
     {
         setStatus(NodeStatus::RUNNING);
     }
-    return child_node_->executeTick();
+    return child_node_->executeTick(ptr);
 }
 
 BT::SubtreeWrapperNode::SubtreeWrapperNode(const std::string &name) :
@@ -23,13 +23,13 @@ BT::SubtreeWrapperNode::SubtreeWrapperNode(const std::string &name) :
   setRegistrationID("TransparentSubtree");
 }
 
-BT::NodeStatus BT::SubtreeWrapperNode::tick()
+BT::NodeStatus BT::SubtreeWrapperNode::tick(std::shared_ptr<void> ptr)
 {
     NodeStatus prev_status = status();
     if (prev_status == NodeStatus::IDLE)
     {
         setStatus(NodeStatus::RUNNING);
     }
-    return child_node_->executeTick();
+    return child_node_->executeTick(ptr);
 }
 

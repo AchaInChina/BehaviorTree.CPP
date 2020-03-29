@@ -31,7 +31,7 @@ class InverterNode : public DecoratorNode
     virtual ~InverterNode() override = default;
 
   private:
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 }
 

@@ -60,7 +60,7 @@ class MoveBaseAction : public BT::AsyncActionNode
         return{ BT::InputPort<Pose2D>("goal") };
     }
 
-    BT::NodeStatus tick() override;
+    BT::NodeStatus tick(std::shared_ptr<void> ptr) override;
 
     virtual void halt() override;
 

@@ -30,9 +30,9 @@ TreeNode::TreeNode(std::string name, NodeConfiguration config)
 {
 }
 
-NodeStatus TreeNode::executeTick()
+NodeStatus TreeNode::executeTick(std::shared_ptr<void> ptr)
 {
-    const NodeStatus status = tick();
+    const NodeStatus status = tick(ptr);
     setStatus(status);
     return status;
 }

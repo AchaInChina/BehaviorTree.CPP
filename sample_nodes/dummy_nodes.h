@@ -37,7 +37,7 @@ class ApproachObject : public BT::SyncActionNode
     }
 
     // You must override the virtual function tick()
-    BT::NodeStatus tick() override;
+    BT::NodeStatus tick(std::shared_ptr<void> ptr) override;
 };
 
 // Example of custom SyncActionNode (synchronous action)
@@ -51,7 +51,7 @@ class SaySomething : public BT::SyncActionNode
     }
 
     // You must override the virtual function tick()
-    BT::NodeStatus tick() override;
+    BT::NodeStatus tick(std::shared_ptr<void> ptr) override;
 
     // It is mandatory to define this static method.
     static BT::PortsList providedPorts()

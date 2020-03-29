@@ -15,14 +15,14 @@
 namespace BT
 {
 
-NodeStatus ReactiveFallback::tick()
+NodeStatus ReactiveFallback::tick(std::shared_ptr<void> ptr)
 {
     size_t failure_count = 0;
 
     for (size_t index = 0; index < childrenCount(); index++)
     {
         TreeNode* current_child_node = children_nodes_[index];
-        const NodeStatus child_status = current_child_node->executeTick();
+        const NodeStatus child_status = current_child_node->executeTick(ptr);
 
         switch (child_status)
         {

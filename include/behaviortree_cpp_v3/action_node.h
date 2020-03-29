@@ -58,7 +58,7 @@ class SyncActionNode : public ActionNodeBase
     ~SyncActionNode() override = default;
 
     /// throws if the derived class return RUNNING.
-    virtual NodeStatus executeTick() override;
+    virtual NodeStatus executeTick(std::shared_ptr<void> ptr = nullptr) override;
 
     /// You don't need to override this
     virtual void halt() override final
@@ -91,7 +91,7 @@ class SimpleActionNode : public SyncActionNode
     ~SimpleActionNode() override = default;
 
   protected:
-    virtual NodeStatus tick() override final;
+    virtual NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override final;
 
     TickFunctor tick_functor_;
 };
@@ -126,7 +126,7 @@ class AsyncActionNode : public ActionNodeBase
     }
 
     // This method spawn a new thread. Do NOT remove the "final" keyword.
-    virtual NodeStatus executeTick() override final;
+    virtual NodeStatus executeTick(std::shared_ptr<void> ptr = nullptr) override final;
 
     virtual void halt() override;
 
@@ -160,7 +160,7 @@ class StatefulActionNode : public ActionNodeBase
       {}
 
       // do not override this method
-      NodeStatus tick() override final;
+      NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override final;
       // do not override this method
       void halt() override final;
 

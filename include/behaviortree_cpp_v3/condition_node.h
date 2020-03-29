@@ -60,7 +60,7 @@ class SimpleConditionNode : public ConditionNode
     ~SimpleConditionNode() override = default;
 
   protected:
-    virtual NodeStatus tick() override;
+    virtual NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
     TickFunctor tick_functor_;
 };

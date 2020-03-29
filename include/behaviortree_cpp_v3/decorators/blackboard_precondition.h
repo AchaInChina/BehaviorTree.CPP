@@ -54,13 +54,12 @@ class BlackboardPreconditionNode : public DecoratorNode
     }
 
   private:
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 
 //----------------------------------------------------
 
-template<typename T> inline
-NodeStatus BlackboardPreconditionNode<T>::tick()
+template<typename T> inline NodeStatus BlackboardPreconditionNode<T>::tick(std::shared_ptr<void> ptr)
 {
     T value_A;
     T value_B;
@@ -72,7 +71,7 @@ NodeStatus BlackboardPreconditionNode<T>::tick()
         getInput("value_B", value_B) &&
         value_B == value_A )
     {
-        return child_node_->executeTick();
+        return child_node_->executeTick(ptr);
     }
 
     if( child()->status() == NodeStatus::RUNNING )

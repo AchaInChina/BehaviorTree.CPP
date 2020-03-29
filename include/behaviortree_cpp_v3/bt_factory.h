@@ -178,13 +178,13 @@ public:
       return nodes.empty() ? nullptr : nodes.front().get();
     }
 
-    NodeStatus tickRoot()
+    NodeStatus tickRoot(std::shared_ptr<void> ptr = nullptr)
     {
       if(!rootNode())
       {
         throw RuntimeError("Empty Tree");
       }
-      NodeStatus ret = rootNode()->executeTick();
+      NodeStatus ret = rootNode()->executeTick(ptr);
       if( ret == NodeStatus::SUCCESS || ret == NodeStatus::FAILURE){
         rootNode()->setStatus(BT::NodeStatus::IDLE);
       }

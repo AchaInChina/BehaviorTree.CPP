@@ -30,7 +30,7 @@ class AlwaysFailureNode : public SyncActionNode
     }
 
   private:
-    virtual BT::NodeStatus tick() override
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override
     {
         return NodeStatus::FAILURE;
     }

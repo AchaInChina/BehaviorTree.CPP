@@ -15,7 +15,7 @@
 namespace BT
 {
 
-NodeStatus ReactiveSequence::tick()
+NodeStatus ReactiveSequence::tick(std::shared_ptr<void> ptr)
 {
     size_t success_count = 0;
     size_t running_count = 0;
@@ -23,7 +23,7 @@ NodeStatus ReactiveSequence::tick()
     for (size_t index = 0; index < childrenCount(); index++)
     {
         TreeNode* current_child_node = children_nodes_[index];
-        const NodeStatus child_status = current_child_node->executeTick();
+        const NodeStatus child_status = current_child_node->executeTick(ptr);
 
         switch (child_status)
         {

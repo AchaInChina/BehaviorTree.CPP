@@ -31,7 +31,7 @@ void SequenceNode::halt()
     ControlNode::halt();
 }
 
-NodeStatus SequenceNode::tick()
+NodeStatus SequenceNode::tick(std::shared_ptr<void> ptr)
 {
     const size_t children_count = children_nodes_.size();
 
@@ -40,7 +40,7 @@ NodeStatus SequenceNode::tick()
     while (current_child_idx_ < children_count)
     {
         TreeNode* current_child_node = children_nodes_[current_child_idx_];
-        const NodeStatus child_status = current_child_node->executeTick();
+        const NodeStatus child_status = current_child_node->executeTick(ptr);
 
         switch (child_status)
         {

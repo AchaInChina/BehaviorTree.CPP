@@ -55,11 +55,10 @@ class SwitchNode : public ControlNode
 
   private:
     int running_child_;
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 
-template<size_t NUM_CASES> inline
-NodeStatus SwitchNode<NUM_CASES>::tick()
+template<size_t NUM_CASES> inline NodeStatus SwitchNode<NUM_CASES>::tick(std::shared_ptr<void> ptr)
 {
     constexpr const char * case_port_names[9] = {
       "case_1", "case_2", "case_3", "case_4", "case_5", "case_6", "case_7", "case_8", "case_9"};
@@ -105,7 +104,7 @@ NodeStatus SwitchNode<NUM_CASES>::tick()
     }
 
     auto& selected_child = children_nodes_[child_index];
-    NodeStatus ret = selected_child->executeTick();
+    NodeStatus ret = selected_child->executeTick(ptr);
     if( ret == NodeStatus::RUNNING )
     {
         running_child_ = child_index;

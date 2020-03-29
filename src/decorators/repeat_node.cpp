@@ -35,7 +35,7 @@ RepeatNode::RepeatNode(const std::string& name, const NodeConfiguration& config)
 
 }
 
-NodeStatus RepeatNode::tick()
+NodeStatus RepeatNode::tick(std::shared_ptr<void> ptr)
 {
     if( read_parameter_from_ports_ )
     {
@@ -49,7 +49,7 @@ NodeStatus RepeatNode::tick()
 
     while (try_index_ < num_cycles_ || num_cycles_== -1 )
     {
-        NodeStatus child_state = child_node_->executeTick();
+        NodeStatus child_state = child_node_->executeTick(ptr);
 
         switch (child_state)
         {

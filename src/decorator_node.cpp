@@ -61,14 +61,14 @@ SimpleDecoratorNode::SimpleDecoratorNode(const std::string& name, TickFunctor ti
 {
 }
 
-NodeStatus SimpleDecoratorNode::tick()
+NodeStatus SimpleDecoratorNode::tick(std::shared_ptr<void> ptr)
 {
-    return tick_functor_(child()->executeTick(), *this);
+    return tick_functor_(child()->executeTick(ptr), *this);
 }
 
-NodeStatus DecoratorNode::executeTick()
+NodeStatus DecoratorNode::executeTick(std::shared_ptr<void> ptr)
 {
-    NodeStatus status = TreeNode::executeTick();
+    NodeStatus status = TreeNode::executeTick(ptr);
     NodeStatus child_status = child()->status();
     if( child_status == NodeStatus::SUCCESS || child_status == NodeStatus::FAILURE )
     {

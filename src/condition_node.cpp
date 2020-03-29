@@ -26,7 +26,7 @@ SimpleConditionNode::SimpleConditionNode(const std::string& name, TickFunctor ti
 {
 }
 
-NodeStatus SimpleConditionNode::tick()
+NodeStatus SimpleConditionNode::tick(std::shared_ptr<void> ptr)
 {
     return tick_functor_(*this);
 }

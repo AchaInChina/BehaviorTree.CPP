@@ -21,11 +21,11 @@ InverterNode::InverterNode(const std::string& name) :
     setRegistrationID("Inverter");
 }
 
-NodeStatus InverterNode::tick()
+NodeStatus InverterNode::tick(std::shared_ptr<void> ptr)
 {
     setStatus(NodeStatus::RUNNING);
 
-    const NodeStatus child_state = child_node_->executeTick();
+    const NodeStatus child_state = child_node_->executeTick(ptr);
 
     switch (child_state)
     {

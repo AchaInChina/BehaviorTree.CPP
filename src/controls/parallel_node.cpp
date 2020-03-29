@@ -34,7 +34,7 @@ ParallelNode::ParallelNode(const std::string &name,
 {
 }
 
-NodeStatus ParallelNode::tick()
+NodeStatus ParallelNode::tick(std::shared_ptr<void> ptr)
 {
     if(read_parameter_from_ports_)
     {
@@ -67,7 +67,7 @@ NodeStatus ParallelNode::tick()
             child_status = child_node->status();
         }
         else {
-            child_status = child_node->executeTick();
+            child_status = child_node->executeTick(ptr);
         }
 
         switch (child_status)

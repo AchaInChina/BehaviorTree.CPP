@@ -30,16 +30,16 @@ class ForceSuccessNode : public DecoratorNode
     }
 
   private:
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 
 //------------ implementation ----------------------------
 
-inline NodeStatus ForceSuccessNode::tick()
+inline NodeStatus ForceSuccessNode::tick(std::shared_ptr<void> ptr)
 {
     setStatus(NodeStatus::RUNNING);
 
-    const NodeStatus child_state = child_node_->executeTick();
+    const NodeStatus child_state = child_node_->executeTick(ptr);
 
     switch (child_state)
     {

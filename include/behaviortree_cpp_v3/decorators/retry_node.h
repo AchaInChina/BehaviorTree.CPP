@@ -59,7 +59,7 @@ class RetryNode : public DecoratorNode
     bool read_parameter_from_ports_;
     static constexpr const char* NUM_ATTEMPTS = "num_attempts";
 
-    virtual BT::NodeStatus tick() override;
+    virtual BT::NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 };
 }
 

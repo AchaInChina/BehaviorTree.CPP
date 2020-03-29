@@ -57,7 +57,7 @@ class RepeatNode : public DecoratorNode
     bool read_parameter_from_ports_;
     static constexpr const char* NUM_CYCLES = "num_cycles";
 
-    virtual NodeStatus tick() override;
+    virtual NodeStatus tick(std::shared_ptr<void> ptr = nullptr) override;
 
     void halt() override;
 };
